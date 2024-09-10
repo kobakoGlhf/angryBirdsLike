@@ -146,6 +146,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hp: 16
   _overDamage: 4
+  _score: 1000
+  _destroyAudio: {fileID: 8300000, guid: 13ad12fb3cabcc44f88dcaaa763f9b04, type: 3}
+  _volume: 500
 --- !u!50 &1139986270485267505
 Rigidbody2D:
   serializedVersion: 4

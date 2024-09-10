@@ -1,3 +1,4 @@
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -7,6 +8,10 @@ public class TargetObj : MonoBehaviour
     [SerializeField] int _overDamage;
     Rigidbody2D _rigidbody;
     BulletCharacter _hitObjIsCharacter;
+    [SerializeField] int _score;
+    [SerializeField] AudioClip _destroyAudio;
+    [SerializeField] float _volume;
+    AudioSource _audioSource;
     int Hp { get => _hp; set
         {
             _hp = value;
@@ -20,6 +25,7 @@ public class TargetObj : MonoBehaviour
     {
         OnStart();
         _rigidbody = GetComponent<Rigidbody2D>();
+        _audioSource=gameObject.AddComponent<AudioSource>();
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -39,9 +45,12 @@ public class TargetObj : MonoBehaviour
         if(force.magnitude <1)return 0;
         return (int)force.magnitude + bonusDamage(collision) / _overDamage;
     }
-    public virtual void DestroyEffect()
+    public void DestroyEffect()
     {
-        InGameManager.Score += 1000;
+        InGameManager.Score += _score;
+        AudioSource.PlayClipAtPoint(_destroyAudio,Vector3.zero,_volume);
+        OnDestroyEffect();
     }
+    public virtual void OnDestroyEffect() { }
     public virtual void OnStart() { }
 }

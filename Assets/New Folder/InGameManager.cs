@@ -13,19 +13,27 @@ public class InGameManager : MonoBehaviour
     public Scene SimulationScene;
     public PhysicsScene2D SimulationPhysics;
     [SerializeField] UnityEvent _clear;
+    [SerializeField] UnityEvent _defeat;
     Transform _table;
     List<Rigidbody2D> _rbList=new List<Rigidbody2D>();
     [SerializeField] List<GameObject> Stage=new List<GameObject>();
     [SerializeField] GameObject Highscore;
+    NextCharacterManager _nextCharacterManager;
+    InputManager _inputManager;
+    bool _isGameEnd;
     private void Awake()
     {
+        Score = 0;
         if (Instans != null)
         {
             Destroy(gameObject);
             return;
         }
         Instans = this;
-        int stageNum = (Stage.Count < SceneChanger.Stage) ? SceneChanger.Stage : 0;
+        Debug.Log(Stage.Count);
+        Debug.Log(Actions.Stage);
+        int stageNum = !(Stage.Count < Actions.Stage) ? Actions.Stage : 0;
+        Debug.Log(stageNum);
         Stage.ForEach(obj => obj.SetActive(false));
         Stage[stageNum].SetActive(true);
         _table = Stage[stageNum].transform.GetChild(0);
@@ -35,24 +43,38 @@ public class InGameManager : MonoBehaviour
         EnemyData = FindObjectsOfType<Enemy>().ToList();
         CreatSimulationCcene();
         _rbList=FindObjectsOfType<Rigidbody2D>().ToList();
+        _nextCharacterManager=FindAnyObjectByType<NextCharacterManager>();
+        _inputManager=FindAnyObjectByType<InputManager>();
     }
     private void Update()
     {
-        if (EnemyData.Count <= 0&& AllRigidbodyIsStoped())
+        if (EnemyData.Count <= 0&& AllRigidbodyIsStoped()&&!_isGameEnd)
         {
             GameClear();
         }
+        else if(_nextCharacterManager._charactersQueue.Count<=0&& 
+            AllRigidbodyIsStoped() && !_isGameEnd&&_inputManager.Bullet==null)
+        {
+            GameDefeat();
+        }
+    }
+    void GameDefeat()
+    {
+        _isGameEnd=true;
+        _defeat.Invoke();
+
     }
     void GameClear()
     {
+        Score += _nextCharacterManager.CharactersQueueCount * 1000;
+        _isGameEnd = true;
         _clear.Invoke();
-        HighScoreManager.HighScores["Stage"+Score].Clear=true;
-        if(HighScoreManager.HighScores["Stage" + Score].HighScore < Score)
+        HighScoreManager.HighScores["Stage"+Actions.Stage].Clear=true;
+        if(HighScoreManager.HighScores["Stage" + Actions.Stage].HighScore < Score)
         {
             Highscore.SetActive(true);
-            HighScoreManager.HighScores["Stage" + Score].HighScore=Score;
+            HighScoreManager.HighScores["Stage" + Actions.Stage].HighScore = Score;
         }
-        Debug.Log("Ÿ—˜");
     }
     bool AllRigidbodyIsStoped()
     {

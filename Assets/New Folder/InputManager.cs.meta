@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 39cf7d8cf7e5c4c4b9bd7313d68cb9e1
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _lineRenderer: {instanceID: 0}
+  - _mouseAudio: {fileID: 8300000, guid: a5bdb30facffadf4ab8b2831e544caf2, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

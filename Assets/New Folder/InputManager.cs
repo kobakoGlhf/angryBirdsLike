@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ImputManager : MonoBehaviour
+public class InputManager : MonoBehaviour
 {
     [SerializeField] float _clickLag = 0.2f;
     [SerializeField] float _power;
@@ -15,6 +15,11 @@ public class ImputManager : MonoBehaviour
     bool _clickNow;
     GameObject _bullet;
     Rigidbody2D _bulletRigidbody;
+    [SerializeField] AudioClip _mouseAudio;
+    [SerializeField] AudioClip _shotAudio;
+    AudioSource _audioSource;
+    [SerializeField] float _audioPlayTime;
+    float _audioTimer = 0;
     public GameObject Bullet
     {
         get => _bullet;
@@ -26,7 +31,10 @@ public class ImputManager : MonoBehaviour
             _bullet = value;
         }
     }
-
+    private void Start()
+    {
+        _audioSource = GameObject.Find("Audio").GetComponent<AudioSource>();
+    }
     // Update is called once per frame
     void Update()
     {
@@ -41,6 +49,7 @@ public class ImputManager : MonoBehaviour
             ShootBullet();
             TimerReset();
             _lineRenderer.enabled = false;
+            _audioSource.PlayOneShot(_shotAudio);
         }
         else if (Input.GetMouseButton(1))//リセット用
         {
@@ -53,8 +62,20 @@ public class ImputManager : MonoBehaviour
             GetVecter();
             Simulation(_bullet.transform, _bullet.transform.position, _shootPos);
             _timer += Time.deltaTime;
+            AudioPlay();
         }
         else _timer = 0;
+    }
+    private void AudioPlay()
+    {
+        var x = Input.GetAxisRaw("Mouse X");
+        var y = Input.GetAxisRaw("Mouse Y");
+        _audioTimer += Time.deltaTime;
+        if ((Mathf.Abs(x) >= 0.1 ||Mathf.Abs(y) >= 0.1) && _audioTimer >= _audioPlayTime)
+        {
+            _audioSource.PlayOneShot(_mouseAudio);
+            _audioTimer = 0;
+        }
     }
     public void ChangeClikedTrue()
     {
@@ -88,7 +109,7 @@ public class ImputManager : MonoBehaviour
             InGameManager.Instans.SimulationScene);
         var rb = clone.GetComponent<Rigidbody2D>();
         rb.gravityScale = 1;
-        rb.AddForce(_velocity*_power, ForceMode2D.Impulse);
+        rb.AddForce(_velocity * _power, ForceMode2D.Impulse);
         _lineRenderer.positionCount = _simulationFrame;
         for (int i = 0; i < _simulationFrame; i++)
         {

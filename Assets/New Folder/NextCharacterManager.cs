@@ -1,16 +1,22 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class NextCharacterManager : MonoBehaviour
 {
-    [SerializeField] Queue<GameObject> _charactersQueue=new Queue<GameObject>();
-    ImputManager _imputManager;
+    [SerializeField] public Queue<GameObject> _charactersQueue = new Queue<GameObject>();
+    InputManager _inputManager;
+    public int CharactersQueueCount
+    {
+        get
+        {
+            int bulletCount = _inputManager.Bullet ? 1 : 0;
+            return _charactersQueue.Count + bulletCount;
+        }
+    }
     public int CharactersCount
     {
         get
         {
-            Debug.Log(_charactersQueue.Count);
             return _charactersQueue.Count;
         }
     }
@@ -23,13 +29,13 @@ public class NextCharacterManager : MonoBehaviour
     }
     private void Start()
     {
-        _imputManager=FindAnyObjectByType<ImputManager>();
+        _inputManager = FindAnyObjectByType<InputManager>();
     }
     void Update()
     {
-        if (_charactersQueue.Count > 0 && _imputManager.Bullet == null)
+        if (_charactersQueue.Count > 0 && _inputManager.Bullet == null)
         {
-            _imputManager.Bullet=_charactersQueue.Dequeue();
+            _inputManager.Bullet = _charactersQueue.Dequeue();
         }
     }
 }

@@ -5,9 +5,9 @@ using UnityEngine.Events;
 
 public class Enemy : TargetObj
 {
-    UnityEvent _event;
+    [SerializeField] UnityEvent _event;
     // Update is called once per frame
-    public override void DestroyEffect()
+    public override void OnDestroyEffect()
     {
         _event?.Invoke();
         InGameManager.EnemyData.Remove(this);

@@ -9,7 +9,7 @@ public class CreatHighScore : MonoBehaviour
     {
         if (HighScoreManager.HighScores.Count == 0)
         {
-            for(int i = 0; i < _stageCount; i++)
+            for(int i = 0; i < _stageCount-1; i++)
             {
                 HighScoreManager.SetDictionary("Stage" + i, 0, false);
             }
