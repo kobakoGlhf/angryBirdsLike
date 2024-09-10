@@ -6,6 +6,14 @@ public class NextCharacterManager : MonoBehaviour
 {
     [SerializeField] Queue<GameObject> _charactersQueue=new Queue<GameObject>();
     ImputManager _imputManager;
+    public int CharactersCount
+    {
+        get
+        {
+            Debug.Log(_charactersQueue.Count);
+            return _charactersQueue.Count;
+        }
+    }
     public GameObject SetCharactersQueue
     {
         set

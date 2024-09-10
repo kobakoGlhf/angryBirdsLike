@@ -82,6 +82,7 @@ public class ImputManager : MonoBehaviour
     void Simulation(Transform bullet, Vector2 pos, Vector2 _velocity)
     {
         var clone = Instantiate(bullet, pos, bullet.rotation);
+        clone.GetComponent<BulletCharacter>()._isBullet = false;
         clone.GetComponent<Renderer>().enabled = false;
         SceneManager.MoveGameObjectToScene(clone.gameObject,
             InGameManager.Instans.SimulationScene);

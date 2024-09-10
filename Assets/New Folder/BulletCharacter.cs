@@ -4,12 +4,12 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class BulletCharacter : MonoBehaviour
 {
-    [SerializeField] bool _isBullet;
+    public bool _isBullet;
     [SerializeField] int _characterPower;
     [SerializeField] string _bounsDamageObjTagName;
     [SerializeField] float _moveTime;
     [SerializeField] float _animationJumpPower;
-    private void Awake()
+    private void Start()
     {
         if (_isBullet)
         {
