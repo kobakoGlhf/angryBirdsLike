@@ -11,12 +11,8 @@ public class Risult : MonoBehaviour
     NextCharacterManager _characters;
     private void Awake()
     {
-
         _characters = FindAnyObjectByType<NextCharacterManager>();
         Debug.Log(_characters);
-    }
-    private void Start()
-    {
     }
     public void RisultTextChange(bool clear)
     {
@@ -26,16 +22,12 @@ public class Risult : MonoBehaviour
         if (clear)
         {
             DOTween.To(() => Scored,
-                x =>
-                {
-                    _score.text = "Score : " + x.ToString();
-                },InGameManager.Score, 1); ;
+                x => _score.text = "Score : " + x.ToString(), InGameManager.Score, 1);
             _highScore.text = "HighScore : " + InGameManager.Score.ToString();
         }
         else
         {
             _score.gameObject.SetActive(false);
-            _highScore.gameObject.SetActive(false);
         }
     }
 }
