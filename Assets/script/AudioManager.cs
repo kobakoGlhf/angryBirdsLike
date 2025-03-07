@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DdoT : MonoBehaviour
+public class AudioManager : MonoBehaviour
 {
-    public static DdoT Instans;
+    public static AudioManager Instans;
     private void Awake()
     {
-        var obj=FindAnyObjectByType<DdoT>();
+        var obj=FindAnyObjectByType<AudioManager>();
         if (obj != this)
         {
             Destroy(gameObject);

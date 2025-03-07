@@ -16,14 +16,14 @@ public class Risult : MonoBehaviour
     }
     public void RisultTextChange(bool clear)
     {
-        _stageName.text = "Stage" + Actions.Stage.ToString();
+        _stageName.text = "Stage" + GameManager.Stage.ToString();
         _isClear.text = clear ? "victory" : "Defeat";
         int Scored = InGameManager.Score - _characters.CharactersQueueCount * 2000;
         if (clear)
         {
             DOTween.To(() => Scored,
                 x => _score.text = "Score : " + x.ToString(), InGameManager.Score, 1);
-            _highScore.text = "HighScore : " + InGameManager.Score.ToString();
+            _highScore.text = "HighScore : " + HighScoreManager.HighScores["Stage"+GameManager.Stage].HighScore.ToString();
         }
         else
         {

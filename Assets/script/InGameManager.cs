@@ -3,6 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
 public class InGameManager : MonoBehaviour
@@ -16,8 +17,8 @@ public class InGameManager : MonoBehaviour
     [SerializeField] UnityEvent _defeat;
     Transform _table;
     List<Rigidbody2D> _rbList=new List<Rigidbody2D>();
-    [SerializeField] List<GameObject> Stage=new List<GameObject>();
-    [SerializeField] GameObject Highscore;
+    [SerializeField] List<GameObject> _stage=new List<GameObject>();
+    [SerializeField] GameObject _highscore;
     NextCharacterManager _nextCharacterManager;
     InputManager _inputManager;
     bool _isGameEnd;
@@ -30,13 +31,13 @@ public class InGameManager : MonoBehaviour
             return;
         }
         Instans = this;
-        Debug.Log(Stage.Count);
-        Debug.Log(Actions.Stage);
-        int stageNum = !(Stage.Count < Actions.Stage) ? Actions.Stage : 0;
+        Debug.Log(_stage.Count);
+        Debug.Log(GameManager.Stage);
+        int stageNum = !(_stage.Count < GameManager.Stage) ? GameManager.Stage : 0;
         Debug.Log(stageNum);
-        Stage.ForEach(obj => obj.SetActive(false));
-        Stage[stageNum].SetActive(true);
-        _table = Stage[stageNum].transform.GetChild(0);
+        _stage.ForEach(obj => obj.SetActive(false));
+        _stage[stageNum].SetActive(true);
+        _table = _stage[stageNum].transform.GetChild(0);
     }
     private void Start()
     {
@@ -68,22 +69,22 @@ public class InGameManager : MonoBehaviour
     {
         Score += _nextCharacterManager.CharactersQueueCount * 1000;
         _isGameEnd = true;
-        _clear.Invoke();
-        HighScoreManager.HighScores["Stage"+Actions.Stage].Clear=true;
-        if(HighScoreManager.HighScores["Stage" + Actions.Stage].HighScore < Score)
+        HighScoreManager.HighScores["Stage"+GameManager.Stage].Clear=true;
+        if(HighScoreManager.HighScores["Stage" + GameManager.Stage].HighScore < Score)
         {
-            Highscore.SetActive(true);
-            HighScoreManager.HighScores["Stage" + Actions.Stage].HighScore = Score;
+            _highscore.SetActive(true);
+            HighScoreManager.HighScores["Stage" + GameManager.Stage].HighScore = Score;
         }
+        _clear.Invoke();
     }
     bool AllRigidbodyIsStoped()
     {
-        foreach(var rb in _rbList){
-            if (rb == null) { }
-            // ‘¬“x‚ÆŠp‘¬“x‚ªŽw’è‚Ìè‡’l‚ð’´‚¦‚Ä‚¢‚½‚çA’âŽ~‚µ‚Ä‚¢‚È‚¢‚ÆŒ©‚È‚·
-            else if (rb.velocity.magnitude > 1)
+        foreach(var rb in _rbList)
+        {   
+            if(rb == null) continue;
+            if ( rb.velocity.magnitude > 1)
             {
-                return false;  // ˆê‚Â‚Å‚à“®‚¢‚Ä‚¢‚½‚çfalse
+                return false;  // ï¿½ï¿½Â‚Å‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ï¿½false
             }
         }
         return true;

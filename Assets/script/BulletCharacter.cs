@@ -33,7 +33,7 @@ public class BulletCharacter : MonoBehaviour
         var input = obj.GetComponent<InputManager>();
         transform.DOJump(obj.transform.position, jumpPower:
             _animationJumpPower, numJumps: 1, duration: _moveTime).OnComplete(() => input.ChangeClikedTrue());
-        Actions.AudioPlay(_jumpAudio);
+        GameManager.AudioPlay(_jumpAudio);
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {

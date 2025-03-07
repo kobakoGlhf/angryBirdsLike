@@ -5,14 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class ButtonCallStatic:MonoBehaviour
 {
-    public void ChangeScene(string name) { Actions.ChangeScene(name); }
-    public void SetStage(int num) { Actions.SetStage(num); }
-    public void DDoTAudioPlay(AudioClip clip)
+    public void ChangeScene(string name) { GameManager.ChangeScene(name); }
+    public void SetStage(int num) { GameManager.SetStage(num); }
+    public void PlayAudio(AudioClip clip)
     {
-        DdoT.Instans.PlayAudio(clip);
+        AudioManager.Instans.PlayAudio(clip);
     }
 }
-public static class Actions
+public static class GameManager
 {
     public static int Stage;
     public static void ChangeScene(string sceneName)
@@ -25,6 +25,6 @@ public static class Actions
     }
     public static void AudioPlay(AudioClip clip)
     {
-        DdoT.Instans.PlayAudio(clip);
+        AudioManager.Instans.PlayAudio(clip);
     }
 }

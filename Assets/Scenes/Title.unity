@@ -619,7 +619,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1426712925}
         m_TargetAssemblyTypeName: ButtonCallStatic, Assembly-CSharp
-        m_MethodName: DDoTAudioPlay
+        m_MethodName: PlayAudio
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 8300000, guid: 7392f8df0c19124409d2268d474140e9, type: 3}
@@ -1905,7 +1905,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1426712925}
         m_TargetAssemblyTypeName: ButtonCallStatic, Assembly-CSharp
-        m_MethodName: DDoTAudioPlay
+        m_MethodName: PlayAudio
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 8300000, guid: 7392f8df0c19124409d2268d474140e9, type: 3}

@@ -658,7 +658,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 364405918}
         m_TargetAssemblyTypeName: ButtonCallStatic, Assembly-CSharp
-        m_MethodName: DDoTAudioPlay
+        m_MethodName: PlayAudio
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 8300000, guid: 7392f8df0c19124409d2268d474140e9, type: 3}
@@ -1053,7 +1053,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 364405918}
         m_TargetAssemblyTypeName: ButtonCallStatic, Assembly-CSharp
-        m_MethodName: DDoTAudioPlay
+        m_MethodName: PlayAudio
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 8300000, guid: 7392f8df0c19124409d2268d474140e9, type: 3}
@@ -2048,6 +2048,7 @@ GameObject:
   - component: {fileID: 554308271}
   - component: {fileID: 554308270}
   - component: {fileID: 554308272}
+  - component: {fileID: 554308273}
   m_Layer: 0
   m_Name: InGameManager
   m_TagString: Untagged
@@ -2122,7 +2123,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 554308272}
         m_TargetAssemblyTypeName: ButtonCallStatic, Assembly-CSharp
-        m_MethodName: DDoTAudioPlay
+        m_MethodName: PlayAudio
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 8300000, guid: a11f3e3cf8e1c234f9667970200e0751, type: 3}
@@ -2209,7 +2210,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 554308272}
         m_TargetAssemblyTypeName: ButtonCallStatic, Assembly-CSharp
-        m_MethodName: DDoTAudioPlay
+        m_MethodName: PlayAudio
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 8300000, guid: 379a3e45f4b32ab42b9ba9fd9cff9669, type: 3}
@@ -2219,12 +2220,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  Stage:
+  _stage:
   - {fileID: 927006983}
   - {fileID: 6571657512481363338}
   - {fileID: 6571657512637467457}
   - {fileID: 6571657513474350920}
-  Highscore: {fileID: 935623901}
+  _highscore: {fileID: 935623901}
 --- !u!4 &554308271
 Transform:
   m_ObjectHideFlags: 0
@@ -2252,6 +2253,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0ad502ace89b7d45a49549fb89a1821, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &554308273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 554308269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e54e3f45d4872a4fb003fb342b08495, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stageCount: 0
 --- !u!1001 &587105158
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12823,6 +12837,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 601734731640357421, guid: ec4fbea4ca5ea934b9cf50f99e8a3c33, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 96c11b0153c960243b1b1919a489f5ee, type: 3}
+    - target: {fileID: 601734731640357421, guid: ec4fbea4ca5ea934b9cf50f99e8a3c33, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 85204418814d2f8468735c78491df494, type: 2}
     - target: {fileID: 5069352046633060488, guid: ec4fbea4ca5ea934b9cf50f99e8a3c33, type: 3}
       propertyPath: m_TileAssetArray.Array.data[4].m_RefCount
       value: 6
